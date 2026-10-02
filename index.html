@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina - Active, Joyful, Practical</title>
+    <!-- 
+      EDITING INSTRUCTIONS:
+      1. To change the page title, edit the text inside the <title> tag below.
+      2. To change colors, modify the hex codes in the tailwind.config script.
+      3. Search for "EDIT:" throughout this document to find places to update your specific content.
+    -->
+    <title>MA Labs | We carry the load</title>
     
-    <!-- Google Fonts: Using 'Outfit' for a joyful, active, and highly readable look -->
+    <!-- Google Fonts: Zilla Slab -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zilla-Slab:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (via CDN for easy zero-build deployment) -->
+    <!-- Tailwind CSS (CDN for simple hosting) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Tailwind Configuration -->
@@ -19,41 +25,57 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#155E58', // Deep Teal
-                        accent: '#E9A13B',  // Golden Orange
-                        light: '#FAFAFA',
-                        dark: '#1E293B'
+                        // Primary: Dark Teal
+                        primary: {
+                            DEFAULT: '#155E58',
+                            light: '#1f857d',
+                            dark: '#0e403c'
+                        },
+                        // Accent: Golden Orange
+                        accent: {
+                            DEFAULT: '#E9A13B',
+                            light: '#f0b868',
+                            dark: '#c78222'
+                        },
+                        background: '#FAFAFA',
+                        surface: '#FFFFFF',
+                        text: '#1F2937'
                     },
                     fontFamily: {
-                        sans: ['Outfit', 'sans-serif'], // Apply Outfit globally
+                        // Apply Zilla Slab globally
+                        sans: ['"Zilla Slab"', 'serif'],
+                        heading: ['"Zilla Slab"', 'serif'],
                     }
                 }
             }
         }
     </script>
 
-    <!-- Custom CSS for page transitions and utility styles -->
+    <!-- Custom Styles for Transitions and Accessibility -->
     <style>
+        /* Base typography & accessible focus outlines */
         body {
-            font-family: 'Outfit', sans-serif;
-            color: #1E293B;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Zilla Slab', serif;
+            color: #1F2937;
             background-color: #FAFAFA;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        *:focus-visible {
+            outline: 3px solid #E9A13B;
+            outline-offset: 2px;
         }
 
-        /* Page Section Logic: Hide all by default, show active */
+        /* Page routing transition styles */
         .page-section {
             display: none;
             opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            transition: opacity 0.4s ease-in-out;
         }
-        
         .page-section.active {
             display: block;
             opacity: 1;
-            transform: translateY(0);
-            animation: fadeIn 0.5s ease-out forwards;
+            animation: fadeIn 0.4s ease-out forwards;
         }
 
         @keyframes fadeIn {
@@ -61,380 +83,440 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Navigation Underline Effect */
-        .nav-link {
-            position: relative;
+        /* Testimonial Carousel hiding scrollbars but keeping snap */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #E9A13B;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after, .nav-link.active-link::after {
-            width: 100%;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <!-- Header / Navigation Area -->
-    <header class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 transition-all duration-300">
+    <!-- Header / Navigation -->
+    <header class="bg-surface shadow-sm sticky top-0 z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 
-                <!-- Brand Logo -->
-                <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="navigateTo('home')">
-                    <div class="h-8 w-8 bg-primary rounded-lg flex items-center justify-center mr-2 group-hover:bg-accent transition-colors">
-                        <span class="text-white font-bold text-lg leading-none">L</span>
+                <!-- Logo: "Bug" style linking to About me -->
+                <!-- EDIT: You can swap this text out for an image logo later if needed -->
+                <button onclick="navigateTo('about')" aria-label="Go to About MA Labs page" class="flex-shrink-0 flex items-center group focus:outline-none focus-visible:ring-4 focus-visible:ring-accent rounded-lg">
+                    <div class="bg-primary text-white font-bold text-xl px-4 py-2 rounded-tl-xl rounded-br-xl shadow-md group-hover:bg-primary-light transition-colors duration-300 border-2 border-primary group-hover:border-primary-light">
+                        MA Labs
                     </div>
-                    <span class="font-bold text-2xl text-gray-900 tracking-tight">Lumina<span class="text-accent">.</span></span>
-                </div>
+                </button>
                 
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex space-x-8 items-center">
-                    <button onclick="navigateTo('home')" class="nav-link active-link text-gray-600 hover:text-primary font-medium px-2 py-1 transition-colors" data-nav="home">Home</button>
-                    <button onclick="navigateTo('about')" class="nav-link text-gray-600 hover:text-primary font-medium px-2 py-1 transition-colors" data-nav="about">About Us</button>
-                    <button onclick="navigateTo('grants')" class="nav-link text-gray-600 hover:text-primary font-medium px-2 py-1 transition-colors" data-nav="grants">Grants</button>
-                    <!-- Call to action button in nav -->
-                    <button onclick="navigateTo('grants')" class="ml-4 bg-primary text-white px-5 py-2 rounded-full font-medium hover:bg-opacity-90 transition-all transform hover:-translate-y-0.5 shadow-sm">
-                        Apply Now
-                    </button>
+                <!-- Desktop Menu -->
+                <nav aria-label="Main Navigation" class="hidden md:flex space-x-8">
+                    <button onclick="navigateTo('home')" class="nav-link active text-gray-600 hover:text-primary font-semibold text-lg px-2 py-1 border-b-2 border-transparent transition-colors" data-target="home">Home</button>
+                    <button onclick="navigateTo('product')" class="nav-link text-gray-600 hover:text-primary font-semibold text-lg px-2 py-1 border-b-2 border-transparent transition-colors" data-target="product">Product</button>
+                    <button onclick="navigateTo('about')" class="nav-link text-gray-600 hover:text-primary font-semibold text-lg px-2 py-1 border-b-2 border-transparent transition-colors" data-target="about">About</button>
                 </nav>
 
-                <!-- Mobile Menu Hamburger Button -->
+                <!-- Mobile Menu Toggle -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none p-2">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    <button id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" class="text-primary hover:text-primary-dark focus:outline-none p-2" aria-label="Open main menu">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full shadow-lg">
-            <div class="flex flex-col space-y-1 px-4 pt-2 pb-6">
-                <button onclick="navigateTo('home')" class="text-left text-gray-800 font-medium py-3 border-b border-gray-50" data-nav="home">Home</button>
-                <button onclick="navigateTo('about')" class="text-left text-gray-800 font-medium py-3 border-b border-gray-50" data-nav="about">About Us</button>
-                <button onclick="navigateTo('grants')" class="text-left text-gray-800 font-medium py-3 border-b border-gray-50" data-nav="grants">Grants</button>
-                <button onclick="navigateTo('grants')" class="mt-4 bg-primary text-white w-full py-3 rounded-xl font-medium">Apply Now</button>
-            </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-surface border-t border-gray-100 shadow-inner">
+            <nav class="flex flex-col space-y-1 px-4 py-4" aria-label="Mobile Navigation">
+                <button onclick="navigateTo('home')" class="mobile-link text-left text-gray-700 font-semibold text-lg py-3 px-4 rounded-md hover:bg-gray-50 focus:bg-gray-50" data-target="home">Home</button>
+                <button onclick="navigateTo('product')" class="mobile-link text-left text-gray-700 font-semibold text-lg py-3 px-4 rounded-md hover:bg-gray-50 focus:bg-gray-50" data-target="product">Product</button>
+                <button onclick="navigateTo('about')" class="mobile-link text-left text-gray-700 font-semibold text-lg py-3 px-4 rounded-md hover:bg-gray-50 focus:bg-gray-50" data-target="about">About</button>
+            </nav>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="flex-grow w-full">
+    <!-- Main Content Area -->
+    <main id="main-content" class="flex-grow w-full focus:outline-none" tabindex="-1">
         
-        <!-- ==========================================
-             HOME PAGE VIEW
-        =========================================== -->
-        <section id="home" class="page-section active">
+        <!-- ==================== HOME PAGE ==================== -->
+        <section id="home" class="page-section active" aria-labelledby="home-heading">
             
             <!-- Hero Section -->
-            <div class="relative bg-light overflow-hidden">
+            <div class="relative bg-surface overflow-hidden">
                 <div class="max-w-7xl mx-auto">
-                    <div class="relative z-10 pb-8 bg-light sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-16 px-4 sm:px-6 lg:px-8">
-                        <div class="sm:text-center lg:text-left mt-10 sm:mt-12 md:mt-16 lg:mt-20">
-                            <!-- Eyebrow text -->
-                            <span class="inline-block py-1 px-3 rounded-full bg-accent/10 text-accent font-semibold text-sm tracking-wide mb-4">
-                                Active. Joyful. Practical.
-                            </span>
-                            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-6xl leading-tight">
-                                Empowering growth for <br>
-                                <span class="text-primary">visionary teams.</span>
+                    <div class="relative z-10 pb-8 bg-surface sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-16 px-4 sm:px-6 lg:px-8">
+                        <div class="sm:text-center lg:text-left mt-8 lg:mt-16">
+                            <!-- Large Headline -->
+                            <h1 id="home-heading" class="text-4xl tracking-tight font-bold text-primary sm:text-5xl md:text-6xl leading-tight">
+                                We carry the load so <br class="hidden lg:block">you don’t have to.
                             </h1>
-                            <p class="mt-4 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-6 md:text-xl lg:mx-0 font-light">
-                                We bridge the gap between innovative ideas and practical execution. A reliable partner for B2C experiences, B2B scaling, and confident investors.
+                            <!-- Smaller Subheadline -->
+                            <p class="mt-6 text-lg text-gray-600 sm:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                                Our specialized robotic carts lug your stuff like a helpful neighbor. Keep your goods—and yourself—moving with our mobility products designed with good living in mind.
                             </p>
-                            
-                            <!-- Action Buttons -->
-                            <div class="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
-                                <div>
-                                    <button onclick="navigateTo('about')" class="w-full flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-primary/90 transition-all shadow-md hover:shadow-lg md:text-lg">
-                                        Discover Our Values
-                                    </button>
-                                </div>
-                                <div class="mt-3 sm:mt-0">
-                                    <button onclick="navigateTo('grants')" class="w-full flex items-center justify-center px-8 py-3.5 border-2 border-gray-200 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 hover:border-accent transition-all md:text-lg">
-                                        View Grants
+                            <!-- CTA Button -->
+                            <div class="mt-8 sm:flex sm:justify-center lg:justify-start">
+                                <div class="rounded-md shadow">
+                                    <button onclick="navigateTo('product')" class="w-full flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-lg text-primary bg-accent hover:bg-accent-light focus:ring-4 focus:ring-primary focus:ring-opacity-50 transition-colors md:px-10">
+                                        Learn More
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Hero Image Area (Right side on desktop) -->
-                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 flex items-center justify-center p-4 lg:p-0">
-                    <!-- Placeholder graphic -->
-                    <div class="w-full h-64 sm:h-72 md:h-96 lg:h-full lg:w-full bg-primary/5 relative overflow-hidden rounded-3xl lg:rounded-none lg:rounded-bl-[120px] shadow-inner">
-                        <!-- Abstract decorative shapes -->
-                        <div class="absolute w-64 h-64 bg-accent/30 rounded-full blur-3xl -top-10 -right-10"></div>
-                        <div class="absolute w-96 h-96 bg-primary/20 rounded-full blur-3xl bottom-10 left-10"></div>
-                        <!-- Unsplash Image placeholder -->
-                        <img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-80" 
-                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                             alt="Team collaborating actively">
-                    </div>
+                <!-- Hero Image -->
+                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-100 flex items-center justify-center">
+                    <!-- EDIT: To change the hero image, replace the src attribute below -->
+                    <img class="h-64 w-full object-cover sm:h-80 md:h-96 lg:w-full lg:h-full shadow-lg lg:rounded-bl-[4rem]" 
+                         src="IMG_20261002_010952.png" 
+                         alt="A parent walking in a city plaza with their child, while a green robotic MA Labs cart carries their groceries and bags alongside them."
+                         onerror="this.src='https://placehold.co/800x600/155E58/FFFFFF?text=Robotic+Cart+in+Action'">
                 </div>
             </div>
 
-            <!-- Value Propositions Section -->
-            <div class="py-24 bg-white relative">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
-                    <div class="text-center max-w-3xl mx-auto mb-16">
-                        <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">A better way to build and grow</h2>
-                        <p class="mt-4 text-xl text-gray-500 font-light">
-                            Practical solutions designed to bring joy to your workflow while maintaining the rigor required for active business scaling.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                        <!-- Card 1 -->
-                        <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                            <div class="h-14 w-14 rounded-2xl bg-primary text-white flex items-center justify-center mb-6 shadow-md">
-                                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">Active Engagement</h3>
-                            <p class="text-gray-600 leading-relaxed">
-                                We proactively monitor trends and partner with our clients to ensure continuous momentum and rapid iteration. Action over perfect planning.
-                            </p>
-                        </div>
-
-                        <!-- Card 2 -->
-                        <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                            <div class="h-14 w-14 rounded-2xl bg-accent text-white flex items-center justify-center mb-6 shadow-md">
-                                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">Joyful Experiences</h3>
-                            <p class="text-gray-600 leading-relaxed">
-                                Tools and services should be a pleasure to use. We prioritize human-centric design that delights consumers, employees, and stakeholders alike.
-                            </p>
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
-                            <div class="h-14 w-14 rounded-2xl bg-primary text-white flex items-center justify-center mb-6 shadow-md">
-                                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">Practical Results</h3>
-                            <p class="text-gray-600 leading-relaxed">
-                                We strip away the noise. Our methodologies focus on tangible outcomes, solid unit economics, and reliable, steady growth.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             ABOUT US PAGE VIEW
-        =========================================== -->
-        <section id="about" class="page-section">
-            <div class="py-20 lg:py-32 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
-                    <!-- Mission Statement Area -->
-                    <div class="text-center max-w-4xl mx-auto mb-24">
-                        <span class="text-accent font-bold tracking-widest uppercase text-sm mb-4 block">Our Mission</span>
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
-                            Building a foundation where <span class="text-primary relative inline-block">practicality meets possibility.<svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-50" fill="currentColor" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z"></path></svg></span>
-                        </h2>
-                        <p class="text-xl text-gray-600 font-light leading-relaxed">
-                            Founded on the belief that robust business structures can coexist with creative freedom, we empower organizations to scale sustainably while maintaining their core identity and joy.
-                        </p>
-                    </div>
-
-                    <!-- Split Content: Principles & Team -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        
-                        <!-- Left side text -->
-                        <div>
-                            <h3 class="text-3xl font-bold text-gray-900 mb-6">Built for Partners & Investors</h3>
-                            <p class="text-lg text-gray-600 mb-8 font-light leading-relaxed">
-                                Transparency and structured growth are at the heart of our operations. We provide our stakeholders with clear metrics, predictable models, and a pragmatic approach to market expansion.
-                            </p>
-                            
-                            <ul class="space-y-6">
-                                <li class="flex items-start bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mt-1">
-                                        <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-lg font-bold text-gray-900">Transparent Reporting</h4>
-                                        <p class="text-gray-500 mt-1">Quarterly updates with no hidden metrics.</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center mt-1">
-                                        <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-lg font-bold text-gray-900">Sustainable Revenue</h4>
-                                        <p class="text-gray-500 mt-1">Models designed for long-term health, not just quick exits.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Right side image/team card -->
-                        <div class="relative">
-                            <div class="absolute inset-0 bg-primary rounded-[3rem] transform translate-x-4 translate-y-4 opacity-20"></div>
-                            <div class="bg-white rounded-[3rem] p-10 lg:p-12 border border-gray-100 shadow-xl relative z-10">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-8 border-b border-gray-100 pb-4">Leadership Team</h3>
-                                <div class="space-y-8">
-                                    <!-- Team Member 1 -->
-                                    <div class="flex items-center space-x-5 group cursor-default">
-                                        <div class="h-16 w-16 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold group-hover:scale-110 transition-transform">JD</div>
-                                        <div>
-                                            <h4 class="text-xl font-bold text-gray-900">Jane Doe</h4>
-                                            <p class="text-accent font-medium">Chief Executive Officer</p>
-                                        </div>
-                                    </div>
-                                    <!-- Team Member 2 -->
-                                    <div class="flex items-center space-x-5 group cursor-default">
-                                        <div class="h-16 w-16 rounded-full bg-dark flex items-center justify-center text-white text-xl font-bold group-hover:scale-110 transition-transform">JS</div>
-                                        <div>
-                                            <h4 class="text-xl font-bold text-gray-900">John Smith</h4>
-                                            <p class="text-accent font-medium">Head of Practical Operations</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             GRANTS PAGE VIEW
-        =========================================== -->
-        <section id="grants" class="page-section">
-            
-            <!-- Grant Header -->
-            <div class="bg-primary py-24 relative overflow-hidden">
-                <!-- Decorative background elements -->
-                <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-5 blur-3xl"></div>
-                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-accent opacity-10 blur-3xl"></div>
-                
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                    <h2 class="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl mb-6 tracking-tight">
-                        Innovation Grants
-                    </h2>
-                    <p class="text-xl text-primary-100 max-w-2xl mx-auto text-gray-200 font-light">
-                        We invest directly in community projects and early-stage startups that embody our core values of active engagement and practical utility.
+            <!-- Collaboration Section -->
+            <div class="bg-primary text-white py-16 sm:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-bold mb-6 text-accent">Community in Motion</h2>
+                    <p class="text-xl max-w-3xl mx-auto leading-relaxed text-gray-100">
+                        We are proud to collaborate with communities in <strong class="text-white">Bolsa Chica</strong> and <strong class="text-white">Huntington Beach</strong>. By partnering with local municipalities and community centers, we are testing our mobility products in the real world to ensure they meet the rigorous demands of active, everyday outdoor living.
                     </p>
                 </div>
             </div>
 
-            <!-- Grant Content Body -->
-            <div class="py-20 bg-light">
+            <!-- Lead Form Section -->
+            <div class="bg-surface py-20 border-b border-gray-200">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold text-primary sm:text-4xl">Tell me about your needs</h2>
+                        <p class="mt-4 text-lg text-gray-600">Interested in bringing our carts to your organization? Fill out the form below to set up an exploratory call.</p>
+                    </div>
+                    
+                    <!-- EDIT: To make this form functional without a backend, you can use services like Formspree.io and replace the action URL -->
+                    <form action="#" method="POST" class="space-y-6 bg-white p-8 rounded-2xl shadow-sm border border-gray-100" aria-label="Exploratory Call Contact Form">
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+                            <div class="sm:col-span-2">
+                                <label for="name" class="block text-sm font-semibold text-gray-700">Name</label>
+                                <div class="mt-1">
+                                    <input type="text" name="name" id="name" autocomplete="name" required class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50">
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="email" class="block text-sm font-semibold text-gray-700">Email Address</label>
+                                <div class="mt-1">
+                                    <input type="email" name="email" id="email" autocomplete="email" required class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50">
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="org-size" class="block text-sm font-semibold text-gray-700">Organization Size</label>
+                                <div class="mt-1">
+                                    <select id="org-size" name="org-size" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50">
+                                        <option>Just me / Individual</option>
+                                        <option>1-10 employees</option>
+                                        <option>11-50 employees</option>
+                                        <option>50+ employees</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="mobility-need" class="block text-sm font-semibold text-gray-700">Need for mobility/accessibility</label>
+                                <div class="mt-1">
+                                    <textarea id="mobility-need" name="mobility-need" rows="3" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50" placeholder="Briefly describe what you are trying to move and where."></textarea>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="scope" class="block text-sm font-semibold text-gray-700">Set up scope of conversation</label>
+                                <div class="mt-1">
+                                    <textarea id="scope" name="scope" rows="2" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50" placeholder="What would you like to achieve in our call?"></textarea>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-2 mt-4">
+                                <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent rounded-md shadow-sm text-lg font-bold text-primary bg-accent hover:bg-accent-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                                    Set up an exploratory call
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Testimonials Section -->
+            <div class="bg-gray-50 py-20 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex flex-col lg:flex-row gap-16">
-                        
-                        <!-- Left Column: Details -->
-                        <div class="lg:w-2/3 space-y-12">
-                            <div>
-                                <h3 class="text-3xl font-bold text-gray-900 mb-4">Current Opportunities</h3>
-                                <p class="text-gray-600 text-lg leading-relaxed">
-                                    We are currently accepting applications for our Q3 Community Builder Cohort. Grants range from <strong class="text-primary font-bold">$5,000 to $25,000</strong> in equity-free funding to help you turn a prototype into a practical reality.
-                                </p>
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-primary sm:text-4xl">What people are saying</h2>
+                    </div>
+                    
+                    <!-- Accessible CSS Snap Carousel -->
+                    <div class="relative">
+                        <div id="testimonial-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 no-scrollbar scroll-smooth" tabindex="0" aria-label="Testimonials Carousel">
+                            
+                            <!-- Testimonial 1 -->
+                            <div class="snap-center shrink-0 w-full md:w-[600px] bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between">
+                                <div class="mb-6">
+                                    <div class="flex text-accent mb-4">
+                                        <!-- Stars -->
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    </div>
+                                    <p class="text-xl text-gray-700 italic">"This cart changed everything for our community center. Moving sports equipment to the beach used to take three trips. Now, it follows us effortlessly."</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary">Sarah J.</p>
+                                    <p class="text-sm text-gray-500">Community Director, Huntington Beach</p>
+                                </div>
                             </div>
                             
-                            <div>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-6">Core Eligibility Criteria</h3>
-                                <div class="grid gap-6 sm:grid-cols-2">
-                                    <!-- Criterion -->
-                                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-accent">
-                                        <h4 class="text-xl font-bold text-gray-900 mb-2">Clear Utility</h4>
-                                        <p class="text-gray-600">Your project must solve a defined, practical problem for a specific community or industry.</p>
+                            <!-- Testimonial 2 -->
+                            <div class="snap-center shrink-0 w-full md:w-[600px] bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between">
+                                <div class="mb-6">
+                                    <div class="flex text-accent mb-4">
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                                     </div>
-                                    <!-- Criterion -->
-                                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-primary">
-                                        <h4 class="text-xl font-bold text-gray-900 mb-2">Active Prototype</h4>
-                                        <p class="text-gray-600">Applicants must have a working prototype or an active proof-of-concept currently in testing.</p>
-                                    </div>
-                                    <!-- Criterion -->
-                                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-accent">
-                                        <h4 class="text-xl font-bold text-gray-900 mb-2">Joyful Approach</h4>
-                                        <p class="text-gray-600">The solution should improve the user's quality of life or working experience positively.</p>
-                                    </div>
-                                    <!-- Criterion -->
-                                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-primary">
-                                        <h4 class="text-xl font-bold text-gray-900 mb-2">Open Minded</h4>
-                                        <p class="text-gray-600">Willingness to receive feedback and engage actively with our advisory network.</p>
-                                    </div>
+                                    <p class="text-xl text-gray-700 italic">"As a parent with two toddlers, grocery runs were a nightmare. My MA Labs cart is honestly my favorite gadget I own. It’s like having an extra set of hands."</p>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary">Marcus T.</p>
+                                    <p class="text-sm text-gray-500">Private Consumer</p>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Right Column: Application Box -->
-                        <div class="lg:w-1/3">
-                            <div class="bg-dark rounded-3xl p-8 text-center text-white sticky top-28 shadow-2xl">
-                                <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            
+                            <!-- Testimonial 3 -->
+                            <div class="snap-center shrink-0 w-full md:w-[600px] bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between">
+                                <div class="mb-6">
+                                    <div class="flex text-accent mb-4">
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    </div>
+                                    <p class="text-xl text-gray-700 italic">"The battery life is incredible, and the terrain navigation over Bolsa Chica's trails is flawless. A triumph of practical engineering."</p>
                                 </div>
-                                <h3 class="text-2xl font-bold mb-3">Ready to apply?</h3>
-                                <p class="text-gray-300 mb-8 text-sm leading-relaxed">
-                                    Applications for the current cohort close in <span class="font-bold text-accent">14 days</span>. Review our criteria carefully before submitting your proposal.
-                                </p>
-                                <button class="w-full bg-accent hover:bg-white hover:text-dark text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg mb-4">
-                                    Start Application
-                                </button>
-                                <p class="text-xs text-gray-400">Takes ~15 mins to complete. No account required.</p>
+                                <div>
+                                    <p class="font-bold text-primary">Dr. Emily R.</p>
+                                    <p class="text-sm text-gray-500">Mobility Accessibility Researcher</p>
+                                </div>
                             </div>
                         </div>
                         
+                        <!-- Simple Carousel Controls -->
+                        <div class="flex justify-center mt-6 space-x-4">
+                            <button onclick="document.getElementById('testimonial-container').scrollBy({left: -300, behavior: 'smooth'})" class="p-2 rounded-full bg-white border border-gray-200 text-primary hover:bg-gray-50 focus:ring-2 focus:ring-accent" aria-label="Previous testimonial">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <button onclick="document.getElementById('testimonial-container').scrollBy({left: 300, behavior: 'smooth'})" class="p-2 rounded-full bg-white border border-gray-200 text-primary hover:bg-gray-50 focus:ring-2 focus:ring-accent" aria-label="Next testimonial">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PRODUCT PAGE ==================== -->
+        <section id="product" class="page-section" aria-labelledby="product-heading">
+            
+            <div class="bg-primary text-white py-16 text-center">
+                <h1 id="product-heading" class="text-4xl font-bold sm:text-5xl">Solutions for Every Path</h1>
+                <p class="mt-4 text-xl text-gray-200 max-w-2xl mx-auto">Let's find the right setup for you.</p>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900">Are you a private individual or an organization?</h2>
+                </div>
+
+                <!-- Pathways Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+                    
+                    <!-- Individual Path -->
+                    <div class="bg-white border-2 border-gray-100 rounded-2xl p-8 hover:border-accent transition-colors shadow-sm flex flex-col h-full">
+                        <div class="flex-grow">
+                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-primary mb-4">Private Individual</h3>
+                            <p class="text-gray-600 text-lg mb-6">You're looking for a personal cart to help with groceries, park trips, or daily errands around the neighborhood.</p>
+                        </div>
+                        <a href="#specs" class="inline-flex justify-center items-center px-6 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-colors">
+                            View Product Specs &darr;
+                        </a>
+                    </div>
+
+                    <!-- Organization Path -->
+                    <div class="bg-primary border-2 border-primary rounded-2xl p-8 shadow-md flex flex-col h-full text-white relative overflow-hidden">
+                        <!-- Decorative background circle -->
+                        <div class="absolute -right-10 -top-10 w-40 h-40 bg-white opacity-5 rounded-full"></div>
+                        <div class="flex-grow relative z-10">
+                            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6">
+                                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-accent mb-4">Organization / Enterprise</h3>
+                            <p class="text-gray-200 text-lg mb-6">You represent a community center, municipality, or business needing a fleet of mobility solutions or custom configurations.</p>
+                        </div>
+                        <button onclick="navigateTo('home')" class="relative z-10 inline-flex justify-center items-center px-6 py-3 bg-accent text-primary font-bold rounded-lg hover:bg-accent-light transition-colors">
+                            Book an Introductory Call
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Detailed Specs Section -->
+                <div id="specs" class="pt-12 border-t border-gray-200 scroll-mt-24">
+                    <h2 class="text-3xl font-bold text-primary mb-10 text-center">MA Labs Robotic Cart: Core Specifications</h2>
+                    
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2">
+                            <div class="p-8 md:p-12 bg-gray-50 flex items-center justify-center">
+                                <!-- Placeholder for a tech-drawing or clean image of the cart alone -->
+                                <img src="https://placehold.co/600x600/155E58/FFFFFF?text=Product+Diagram" alt="Diagram showing the sturdy 6-wheel base and spacious cargo bin of the MA Labs cart" class="rounded-lg shadow-sm mix-blend-multiply">
+                            </div>
+                            <div class="p-8 md:p-12">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6">Built for Everyday Life</h3>
+                                <ul class="space-y-6">
+                                    <li class="flex items-start">
+                                        <div class="flex-shrink-0 h-6 w-6 text-accent mt-1">
+                                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h4 class="text-lg font-bold text-gray-900">Follow-Me Technology</h4>
+                                            <p class="mt-1 text-gray-600">Advanced LiDAR and computer vision keeps the cart safely tethered to you at a comfortable walking pace.</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="flex-shrink-0 h-6 w-6 text-accent mt-1">
+                                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h4 class="text-lg font-bold text-gray-900">All-Terrain 6-Wheel Drive</h4>
+                                            <p class="mt-1 text-gray-600">Navigate curbs, sand, and uneven sidewalks easily with our proprietary suspension system.</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="flex-shrink-0 h-6 w-6 text-accent mt-1">
+                                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h4 class="text-lg font-bold text-gray-900">Heavy-Duty Capacity</h4>
+                                            <p class="mt-1 text-gray-600">Safely carries up to 150 lbs of groceries, sports gear, or picnic supplies.</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="flex-shrink-0 h-6 w-6 text-accent mt-1">
+                                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h4 class="text-lg font-bold text-gray-900">All-Day Battery</h4>
+                                            <p class="mt-1 text-gray-600">Up to 12 miles of active following on a single charge. Plugs into any standard wall outlet.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ABOUT PAGE ==================== -->
+        <section id="about" class="page-section" aria-labelledby="about-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    
+                    <!-- Story Section -->
+                    <div>
+                        <h1 id="about-heading" class="text-4xl font-bold text-primary mb-8 sm:text-5xl">The Story Behind <br>MA Labs</h1>
+                        
+                        <div class="prose prose-lg text-gray-600">
+                            <!-- EDIT: Replace with your actual background experience -->
+                            <p class="mb-6 text-xl text-gray-800 font-medium">
+                                Hi, I'm Catherine. Before founding MA Labs, I spent [Number] years working in [Your Industry/Background, e.g., robotics and mechanical engineering], building tools designed to make human life a little bit easier.
+                            </p>
+                            
+                            <!-- EDIT: Replace with the sweet story about your abuela -->
+                            <p class="mb-6">
+                                But the real inspiration for MA Labs didn't come from a lab. It came from my Abuela. Growing up, I watched her stubbornly insist on doing her own grocery shopping at the local market. She loved the independence, the fresh air, and chatting with the vendors. But as she got older, carrying the heavy bags back home became a struggle that slowly started to rob her of that daily joy.
+                            </p>
+                            <p class="mb-6">
+                                I realized that true mobility isn't just about wheelchairs or vehicles—it's about removing the literal burdens that stop people from living their lives actively and vibrantly. I built the first prototype of our cart in my garage so my Abuela could walk freely, unburdened, with her "helpful neighbor" carrying the load right beside her. 
+                            </p>
+                            <p>
+                                Today, MA Labs is dedicated to that exact mission: keeping goods—and people—moving with dignity, joy, and practical design.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Contact/CTA Section -->
+                    <div class="bg-primary text-white rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
+                        <!-- Decorative shapes -->
+                        <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-primary-light opacity-50"></div>
+                        <div class="absolute bottom-0 left-0 -ml-8 -mb-8 w-24 h-24 rounded-full bg-accent opacity-20"></div>
+                        
+                        <div class="relative z-10">
+                            <h2 class="text-3xl font-bold text-accent mb-4">Believe in what we’re doing?</h2>
+                            <p class="text-lg mb-8 text-gray-100">Let’s find a way to collaborate. Whether it's for funding, partnerships, joining the team, or becoming a beta tester—I'd love to hear from you.</p>
+                            
+                            <!-- Mailto Contact Form -->
+                            <!-- EDIT: action="mailto:..." uses the user's default email client. Keep enctype="text/plain" so the text is readable. -->
+                            <form action="mailto:catherine@maryalicialabs.com" method="POST" enctype="text/plain" class="space-y-4" aria-label="Direct Contact Form">
+                                <div>
+                                    <label for="contact-name" class="block text-sm font-semibold text-gray-200">Name</label>
+                                    <input type="text" id="contact-name" name="Name" required class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent">
+                                </div>
+                                <div>
+                                    <label for="contact-reason" class="block text-sm font-semibold text-gray-200">Reason for Outreach</label>
+                                    <select id="contact-reason" name="Reason" class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent">
+                                        <option>Partnership Inquiry</option>
+                                        <option>Investment/Funding</option>
+                                        <option>Beta Testing</option>
+                                        <option>Careers</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="contact-message" class="block text-sm font-semibold text-gray-200">Message</label>
+                                    <textarea id="contact-message" name="Message" rows="4" required class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent"></textarea>
+                                </div>
+                                <button type="submit" class="w-full mt-4 bg-accent hover:bg-accent-light text-primary font-bold text-lg py-4 px-6 rounded-md transition-colors focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50">
+                                    Send Email to Catherine
+                                </button>
+                                <p class="text-xs text-center text-gray-300 mt-2">This will open your default email application.</p>
+                            </form>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer Area -->
-    <footer class="bg-white border-t border-gray-200 mt-auto">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="md:flex md:items-center md:justify-between">
-                
-                <!-- Social Links -->
-                <div class="flex justify-center md:justify-start space-x-6 md:order-2">
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                        <span class="sr-only">Twitter</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
-                        <span class="sr-only">LinkedIn</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
-                    </a>
-                </div>
-                
-                <!-- Copyright & Brand -->
-                <div class="mt-8 md:mt-0 md:order-1 flex flex-col md:flex-row items-center gap-4">
-                    <span class="font-bold text-xl text-gray-900 tracking-tight hidden md:block">Lumina<span class="text-accent">.</span></span>
-                    <p class="text-center text-sm text-gray-500 font-light">
-                        &copy; 2026 Lumina Inc. All rights reserved. Active. Joyful. Practical.
-                    </p>
-                </div>
-                
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-gray-200 mt-auto py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="font-bold text-xl text-primary">MA Labs</span>
+            </div>
+            <div class="text-gray-500 text-sm">
+                &copy; 2026 Mary Alicia Labs. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- Interactivity Script -->
+    <!-- Scripts for Navigation and Interactivity -->
     <script>
         /**
-         * Navigates between "pages" by toggling visibility classes.
-         * @param {string} targetId - The ID of the section to show.
+         * Navigation logic for Single Page App (SPA) feel.
+         * Hides all sections, shows the target, and updates active nav states.
          */
         function navigateTo(targetId) {
             // 1. Hide all page sections
@@ -443,38 +525,46 @@
                 section.classList.remove('active');
             });
 
-            // 2. Remove active state from all navigation links
-            const navLinks = document.querySelectorAll('[data-nav]');
+            // 2. Remove active styling from all links
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
             navLinks.forEach(link => {
-                link.classList.remove('active-link');
-                link.classList.remove('text-primary');
-                link.classList.add('text-gray-600');
+                // Remove visual active cues
+                link.classList.remove('text-primary', 'border-accent');
+                if(link.classList.contains('nav-link')) {
+                    link.classList.add('border-transparent');
+                }
+                // Accessibility: remove aria-current
+                link.removeAttribute('aria-current');
             });
 
-            // 3. Show the target section
+            // 3. Show target section
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.classList.add('active');
             }
 
-            // 4. Highlight the active nav links (both desktop and mobile)
-            const activeLinks = document.querySelectorAll(`[data-nav="${targetId}"]`);
+            // 4. Highlight new active links
+            const activeLinks = document.querySelectorAll(`[data-target="${targetId}"]`);
             activeLinks.forEach(link => {
-                link.classList.add('active-link');
-                link.classList.remove('text-gray-600');
                 link.classList.add('text-primary');
+                if(link.classList.contains('nav-link')) {
+                    link.classList.remove('border-transparent');
+                    link.classList.add('border-accent');
+                }
+                // Accessibility: announce active page
+                link.setAttribute('aria-current', 'page');
             });
 
-            // 5. Scroll to top of the page smoothly
+            // 5. Scroll to top and shift focus for accessibility
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('main-content').focus();
 
             // 6. Close mobile menu if it is open
             const mobileMenu = document.getElementById('mobile-menu');
-            const menuIconPath = document.getElementById('menu-icon-path');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             if (!mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
-                // Reset hamburger icon
-                menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
             }
         }
 
@@ -482,21 +572,17 @@
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            const menuIconPath = document.getElementById('menu-icon-path');
 
             mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                
-                // Toggle between Hamburger and 'X' icon
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Hamburger
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'true');
                 } else {
-                    menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // X mark
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 }
             });
-            
-            // Initialize: Ensure home is active on first load
-            navigateTo('home');
         });
     </script>
 </body>
