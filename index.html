@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina - Active, Joyful, Practical</title>
+    
+    <!-- Google Fonts: Using 'Outfit' for a joyful, active, and highly readable look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN for easy zero-build deployment) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#155E58', // Deep Teal
+                        accent: '#E9A13B',  // Golden Orange
+                        light: '#FAFAFA',
+                        dark: '#1E293B'
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'], // Apply Outfit globally
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for page transitions and utility styles -->
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: #1E293B;
+            -webkit-font-smoothing: antialiased;
+            background-color: #FAFAFA;
+        }
+
+        /* Page Section Logic: Hide all by default, show active */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+        
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navigation Underline Effect */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #E9A13B;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active-link::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header / Navigation Area -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Brand Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="navigateTo('home')">
+                    <div class="h-8 w-8 bg-primary rounded-lg flex items-center justify-center mr-2 group-hover:bg-accent transition-colors">
+                        <span class="text-white font-bold text-lg leading-none">L</span>
+                    </div>
+                    <span class="font-bold text-2xl text-gray-900 tracking-tight">Lumina<span class="text-accent">.</span></span>
+                </div>
+                
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <button onclick="navigateTo('home')" class="nav-link active-link text-gray-600 hover:text-primary font-medium px-2 py-1 transition-colors" data-nav="home">Home</button>
+                    <button onclick="navigateTo('about')" class="nav-link text-gray-600 hover:text-primary font-medium px-2 py-1 transition-colors" data-nav="about">About Us</button>
+                    <button onclick="navigateTo('grants')" class="nav-link text-gray-600 hover:text-primary font-medium px-2 py-1 transition-colors" data-nav="grants">Grants</button>
+                    <!-- Call to action button in nav -->
+                    <button onclick="navigateTo('grants')" class="ml-4 bg-primary text-white px-5 py-2 rounded-full font-medium hover:bg-opacity-90 transition-all transform hover:-translate-y-0.5 shadow-sm">
+                        Apply Now
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full shadow-lg">
+            <div class="flex flex-col space-y-1 px-4 pt-2 pb-6">
+                <button onclick="navigateTo('home')" class="text-left text-gray-800 font-medium py-3 border-b border-gray-50" data-nav="home">Home</button>
+                <button onclick="navigateTo('about')" class="text-left text-gray-800 font-medium py-3 border-b border-gray-50" data-nav="about">About Us</button>
+                <button onclick="navigateTo('grants')" class="text-left text-gray-800 font-medium py-3 border-b border-gray-50" data-nav="grants">Grants</button>
+                <button onclick="navigateTo('grants')" class="mt-4 bg-primary text-white w-full py-3 rounded-xl font-medium">Apply Now</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow w-full">
+        
+        <!-- ==========================================
+             HOME PAGE VIEW
+        =========================================== -->
+        <section id="home" class="page-section active">
+            
+            <!-- Hero Section -->
+            <div class="relative bg-light overflow-hidden">
+                <div class="max-w-7xl mx-auto">
+                    <div class="relative z-10 pb-8 bg-light sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-16 px-4 sm:px-6 lg:px-8">
+                        <div class="sm:text-center lg:text-left mt-10 sm:mt-12 md:mt-16 lg:mt-20">
+                            <!-- Eyebrow text -->
+                            <span class="inline-block py-1 px-3 rounded-full bg-accent/10 text-accent font-semibold text-sm tracking-wide mb-4">
+                                Active. Joyful. Practical.
+                            </span>
+                            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-6xl leading-tight">
+                                Empowering growth for <br>
+                                <span class="text-primary">visionary teams.</span>
+                            </h1>
+                            <p class="mt-4 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-6 md:text-xl lg:mx-0 font-light">
+                                We bridge the gap between innovative ideas and practical execution. A reliable partner for B2C experiences, B2B scaling, and confident investors.
+                            </p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
+                                <div>
+                                    <button onclick="navigateTo('about')" class="w-full flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-primary/90 transition-all shadow-md hover:shadow-lg md:text-lg">
+                                        Discover Our Values
+                                    </button>
+                                </div>
+                                <div class="mt-3 sm:mt-0">
+                                    <button onclick="navigateTo('grants')" class="w-full flex items-center justify-center px-8 py-3.5 border-2 border-gray-200 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 hover:border-accent transition-all md:text-lg">
+                                        View Grants
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Image Area (Right side on desktop) -->
+                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 flex items-center justify-center p-4 lg:p-0">
+                    <!-- Placeholder graphic -->
+                    <div class="w-full h-64 sm:h-72 md:h-96 lg:h-full lg:w-full bg-primary/5 relative overflow-hidden rounded-3xl lg:rounded-none lg:rounded-bl-[120px] shadow-inner">
+                        <!-- Abstract decorative shapes -->
+                        <div class="absolute w-64 h-64 bg-accent/30 rounded-full blur-3xl -top-10 -right-10"></div>
+                        <div class="absolute w-96 h-96 bg-primary/20 rounded-full blur-3xl bottom-10 left-10"></div>
+                        <!-- Unsplash Image placeholder -->
+                        <img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-80" 
+                             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                             alt="Team collaborating actively">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Value Propositions Section -->
+            <div class="py-24 bg-white relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">A better way to build and grow</h2>
+                        <p class="mt-4 text-xl text-gray-500 font-light">
+                            Practical solutions designed to bring joy to your workflow while maintaining the rigor required for active business scaling.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        <!-- Card 1 -->
+                        <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
+                            <div class="h-14 w-14 rounded-2xl bg-primary text-white flex items-center justify-center mb-6 shadow-md">
+                                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Active Engagement</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                We proactively monitor trends and partner with our clients to ensure continuous momentum and rapid iteration. Action over perfect planning.
+                            </p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
+                            <div class="h-14 w-14 rounded-2xl bg-accent text-white flex items-center justify-center mb-6 shadow-md">
+                                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Joyful Experiences</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Tools and services should be a pleasure to use. We prioritize human-centric design that delights consumers, employees, and stakeholders alike.
+                            </p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
+                            <div class="h-14 w-14 rounded-2xl bg-primary text-white flex items-center justify-center mb-6 shadow-md">
+                                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Practical Results</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                We strip away the noise. Our methodologies focus on tangible outcomes, solid unit economics, and reliable, steady growth.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             ABOUT US PAGE VIEW
+        =========================================== -->
+        <section id="about" class="page-section">
+            <div class="py-20 lg:py-32 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <!-- Mission Statement Area -->
+                    <div class="text-center max-w-4xl mx-auto mb-24">
+                        <span class="text-accent font-bold tracking-widest uppercase text-sm mb-4 block">Our Mission</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                            Building a foundation where <span class="text-primary relative inline-block">practicality meets possibility.<svg class="absolute w-full h-3 -bottom-1 left-0 text-accent opacity-50" fill="currentColor" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z"></path></svg></span>
+                        </h2>
+                        <p class="text-xl text-gray-600 font-light leading-relaxed">
+                            Founded on the belief that robust business structures can coexist with creative freedom, we empower organizations to scale sustainably while maintaining their core identity and joy.
+                        </p>
+                    </div>
+
+                    <!-- Split Content: Principles & Team -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        
+                        <!-- Left side text -->
+                        <div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-6">Built for Partners & Investors</h3>
+                            <p class="text-lg text-gray-600 mb-8 font-light leading-relaxed">
+                                Transparency and structured growth are at the heart of our operations. We provide our stakeholders with clear metrics, predictable models, and a pragmatic approach to market expansion.
+                            </p>
+                            
+                            <ul class="space-y-6">
+                                <li class="flex items-start bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mt-1">
+                                        <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg font-bold text-gray-900">Transparent Reporting</h4>
+                                        <p class="text-gray-500 mt-1">Quarterly updates with no hidden metrics.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center mt-1">
+                                        <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg font-bold text-gray-900">Sustainable Revenue</h4>
+                                        <p class="text-gray-500 mt-1">Models designed for long-term health, not just quick exits.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Right side image/team card -->
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-primary rounded-[3rem] transform translate-x-4 translate-y-4 opacity-20"></div>
+                            <div class="bg-white rounded-[3rem] p-10 lg:p-12 border border-gray-100 shadow-xl relative z-10">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-8 border-b border-gray-100 pb-4">Leadership Team</h3>
+                                <div class="space-y-8">
+                                    <!-- Team Member 1 -->
+                                    <div class="flex items-center space-x-5 group cursor-default">
+                                        <div class="h-16 w-16 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold group-hover:scale-110 transition-transform">JD</div>
+                                        <div>
+                                            <h4 class="text-xl font-bold text-gray-900">Jane Doe</h4>
+                                            <p class="text-accent font-medium">Chief Executive Officer</p>
+                                        </div>
+                                    </div>
+                                    <!-- Team Member 2 -->
+                                    <div class="flex items-center space-x-5 group cursor-default">
+                                        <div class="h-16 w-16 rounded-full bg-dark flex items-center justify-center text-white text-xl font-bold group-hover:scale-110 transition-transform">JS</div>
+                                        <div>
+                                            <h4 class="text-xl font-bold text-gray-900">John Smith</h4>
+                                            <p class="text-accent font-medium">Head of Practical Operations</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             GRANTS PAGE VIEW
+        =========================================== -->
+        <section id="grants" class="page-section">
+            
+            <!-- Grant Header -->
+            <div class="bg-primary py-24 relative overflow-hidden">
+                <!-- Decorative background elements -->
+                <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-5 blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-accent opacity-10 blur-3xl"></div>
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <h2 class="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl mb-6 tracking-tight">
+                        Innovation Grants
+                    </h2>
+                    <p class="text-xl text-primary-100 max-w-2xl mx-auto text-gray-200 font-light">
+                        We invest directly in community projects and early-stage startups that embody our core values of active engagement and practical utility.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grant Content Body -->
+            <div class="py-20 bg-light">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row gap-16">
+                        
+                        <!-- Left Column: Details -->
+                        <div class="lg:w-2/3 space-y-12">
+                            <div>
+                                <h3 class="text-3xl font-bold text-gray-900 mb-4">Current Opportunities</h3>
+                                <p class="text-gray-600 text-lg leading-relaxed">
+                                    We are currently accepting applications for our Q3 Community Builder Cohort. Grants range from <strong class="text-primary font-bold">$5,000 to $25,000</strong> in equity-free funding to help you turn a prototype into a practical reality.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6">Core Eligibility Criteria</h3>
+                                <div class="grid gap-6 sm:grid-cols-2">
+                                    <!-- Criterion -->
+                                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-accent">
+                                        <h4 class="text-xl font-bold text-gray-900 mb-2">Clear Utility</h4>
+                                        <p class="text-gray-600">Your project must solve a defined, practical problem for a specific community or industry.</p>
+                                    </div>
+                                    <!-- Criterion -->
+                                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-primary">
+                                        <h4 class="text-xl font-bold text-gray-900 mb-2">Active Prototype</h4>
+                                        <p class="text-gray-600">Applicants must have a working prototype or an active proof-of-concept currently in testing.</p>
+                                    </div>
+                                    <!-- Criterion -->
+                                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-accent">
+                                        <h4 class="text-xl font-bold text-gray-900 mb-2">Joyful Approach</h4>
+                                        <p class="text-gray-600">The solution should improve the user's quality of life or working experience positively.</p>
+                                    </div>
+                                    <!-- Criterion -->
+                                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-t-4 border-t-primary">
+                                        <h4 class="text-xl font-bold text-gray-900 mb-2">Open Minded</h4>
+                                        <p class="text-gray-600">Willingness to receive feedback and engage actively with our advisory network.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Application Box -->
+                        <div class="lg:w-1/3">
+                            <div class="bg-dark rounded-3xl p-8 text-center text-white sticky top-28 shadow-2xl">
+                                <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-3">Ready to apply?</h3>
+                                <p class="text-gray-300 mb-8 text-sm leading-relaxed">
+                                    Applications for the current cohort close in <span class="font-bold text-accent">14 days</span>. Review our criteria carefully before submitting your proposal.
+                                </p>
+                                <button class="w-full bg-accent hover:bg-white hover:text-dark text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg mb-4">
+                                    Start Application
+                                </button>
+                                <p class="text-xs text-gray-400">Takes ~15 mins to complete. No account required.</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Area -->
+    <footer class="bg-white border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                
+                <!-- Social Links -->
+                <div class="flex justify-center md:justify-start space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                    </a>
+                </div>
+                
+                <!-- Copyright & Brand -->
+                <div class="mt-8 md:mt-0 md:order-1 flex flex-col md:flex-row items-center gap-4">
+                    <span class="font-bold text-xl text-gray-900 tracking-tight hidden md:block">Lumina<span class="text-accent">.</span></span>
+                    <p class="text-center text-sm text-gray-500 font-light">
+                        &copy; 2026 Lumina Inc. All rights reserved. Active. Joyful. Practical.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactivity Script -->
+    <script>
+        /**
+         * Navigates between "pages" by toggling visibility classes.
+         * @param {string} targetId - The ID of the section to show.
+         */
+        function navigateTo(targetId) {
+            // 1. Hide all page sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // 2. Remove active state from all navigation links
+            const navLinks = document.querySelectorAll('[data-nav]');
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+                link.classList.remove('text-primary');
+                link.classList.add('text-gray-600');
+            });
+
+            // 3. Show the target section
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // 4. Highlight the active nav links (both desktop and mobile)
+            const activeLinks = document.querySelectorAll(`[data-nav="${targetId}"]`);
+            activeLinks.forEach(link => {
+                link.classList.add('active-link');
+                link.classList.remove('text-gray-600');
+                link.classList.add('text-primary');
+            });
+
+            // 5. Scroll to top of the page smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 6. Close mobile menu if it is open
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconPath = document.getElementById('menu-icon-path');
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                // Reset hamburger icon
+                menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            }
+        }
+
+        // Mobile Menu Toggle Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIconPath = document.getElementById('menu-icon-path');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                
+                // Toggle between Hamburger and 'X' icon
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Hamburger
+                } else {
+                    menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // X mark
+                }
+            });
+            
+            // Initialize: Ensure home is active on first load
+            navigateTo('home');
+        });
+    </script>
+</body>
+</html>
