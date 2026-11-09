@@ -138,27 +138,21 @@ e<!DOCTYPE html>
 
     <!-- Main Content Area -->
     <main id="main-content" class="flex-grow w-full focus:outline-none" tabindex="-1">
-        
         <!-- ==================== HOME PAGE ==================== -->
         <section id="home" class="page-section active" aria-labelledby="home-heading">
-            
-            <!-- Hero Section -->
             <div class="relative bg-surface overflow-hidden">
                 <div class="max-w-7xl mx-auto">
                     <div class="relative z-10 pb-8 bg-surface sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-16 px-4 sm:px-6 lg:px-8">
                         <div class="sm:text-center lg:text-left mt-8 lg:mt-16">
-                            <!-- Large Headline -->
                             <h1 id="home-heading" class="text-4xl tracking-tight font-bold text-primary sm:text-5xl md:text-6xl leading-tight">
                                 We carry the load so <br class="hidden lg:block">you don’t have to.
                             </h1>
-                            <!-- Smaller Subheadline -->
                             <p class="mt-6 text-lg text-gray-600 sm:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
                                 Our specialized robotic carts lug your stuff like a helpful neighbor. Keep your goods—and yourself—moving with our mobility products designed with good living in mind.
                             </p>
-                            <!-- CTA Button -->
                             <div class="mt-8 sm:flex sm:justify-center lg:justify-start">
                                 <div class="rounded-md shadow">
-                                    <button onclick="navigateTo('product')" class="w-full flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-lg text-primary bg-accent hover:bg-accent-light focus:ring-4 focus:ring-primary focus:ring-opacity-50 transition-colors md:px-10">
+                                    <button onclick="navigateTo('product')" class="w-full flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-lg text-primary bg-accent hover:bg-accent-light focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50 transition-colors md:px-10">
                                         Learn More
                                     </button>
                                 </div>
@@ -166,17 +160,11 @@ e<!DOCTYPE html>
                         </div>
                     </div>
                 </div>
-                <!-- Hero Image -->
                 <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-100 flex items-center justify-center">
-                    <!-- EDIT: To change the hero image, replace the src attribute below -->
-                    <img class="h-64 w-full object-cover sm:h-80 md:h-96 lg:w-full lg:h-full shadow-lg lg:rounded-bl-[4rem]" 
-                         src="IMG_20261002_010952.png" 
-                         alt="A parent walking in a city plaza with their child, while a green robotic MA Labs cart carries their groceries and bags alongside them."
-                         onerror="this.src='https://placehold.co/800x600/155E58/FFFFFF?text=Robotic+Cart+in+Action'">
+                    <img class="h-64 w-full object-cover sm:h-80 md:h-96 lg:w-full lg:h-full shadow-lg lg:rounded-bl-[4rem]" src="IMG_20261002_010952.png" alt="A parent walking in a city plaza with their child, while a green robotic MA Labs cart carries their groceries and bags alongside them." onerror="this.src='https://placehold.co/800x600/155E58/FFFFFF?text=Robotic+Cart+in+Action'">
                 </div>
             </div>
 
-            <!-- Collaboration Section -->
             <div class="bg-primary text-white py-16 sm:py-24">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 class="text-3xl font-bold mb-6 text-accent">Community in Motion</h2>
@@ -186,119 +174,58 @@ e<!DOCTYPE html>
                 </div>
             </div>
 
-            <!-- Lead Form Section -->
             <div class="bg-surface py-20 border-b border-gray-200">
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-10">
                         <h2 class="text-3xl font-bold text-primary sm:text-4xl">Tell me about your needs</h2>
                         <p class="mt-4 text-lg text-gray-600">Interested in bringing our carts to your organization? Fill out the form below to set up an exploratory call.</p>
                     </div>
-                    
-                    <!-- EDIT: To make this form functional without a backend, you can use services like Formspree.io and replace the action URL -->
+                    <!-- This lead form still needs a form service/backend to submit online. -->
                     <form action="#" method="POST" class="space-y-6 bg-white p-8 rounded-2xl shadow-sm border border-gray-100" aria-label="Exploratory Call Contact Form">
                         <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
                             <div class="sm:col-span-2">
                                 <label for="name" class="block text-sm font-semibold text-gray-700">Name</label>
-                                <div class="mt-1">
-                                    <input type="text" name="name" id="name" autocomplete="name" required class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50">
-                                </div>
+                                <div class="mt-1"><input type="text" name="name" id="name" autocomplete="name" required class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50"></div>
                             </div>
                             <div class="sm:col-span-2">
                                 <label for="email" class="block text-sm font-semibold text-gray-700">Email Address</label>
-                                <div class="mt-1">
-                                    <input type="email" name="email" id="email" autocomplete="email" required class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50">
-                                </div>
+                                <div class="mt-1"><input type="email" name="email" id="email" autocomplete="email" required class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50"></div>
                             </div>
                             <div class="sm:col-span-2">
                                 <label for="org-size" class="block text-sm font-semibold text-gray-700">Organization Size</label>
-                                <div class="mt-1">
-                                    <select id="org-size" name="org-size" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50">
-                                        <option>Just me / Individual</option>
-                                        <option>1-10 employees</option>
-                                        <option>11-50 employees</option>
-                                        <option>50+ employees</option>
-                                    </select>
-                                </div>
+                                <div class="mt-1"><select id="org-size" name="org-size" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50"><option>Just me / Individual</option><option>1-10 employees</option><option>11-50 employees</option><option>50+ employees</option></select></div>
                             </div>
                             <div class="sm:col-span-2">
                                 <label for="mobility-need" class="block text-sm font-semibold text-gray-700">Need for mobility/accessibility</label>
-                                <div class="mt-1">
-                                    <textarea id="mobility-need" name="mobility-need" rows="3" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50" placeholder="Briefly describe what you are trying to move and where."></textarea>
-                                </div>
+                                <div class="mt-1"><textarea id="mobility-need" name="mobility-need" rows="3" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50" placeholder="Briefly describe what you are trying to move and where."></textarea></div>
                             </div>
                             <div class="sm:col-span-2">
                                 <label for="scope" class="block text-sm font-semibold text-gray-700">Set up scope of conversation</label>
-                                <div class="mt-1">
-                                    <textarea id="scope" name="scope" rows="2" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50" placeholder="What would you like to achieve in our call?"></textarea>
-                                </div>
+                                <div class="mt-1"><textarea id="scope" name="scope" rows="2" class="py-3 px-4 block w-full shadow-sm focus:ring-accent focus:border-accent border-gray-300 rounded-md border bg-gray-50" placeholder="What would you like to achieve in our call?"></textarea></div>
                             </div>
-                            <div class="sm:col-span-2 mt-4">
-                                <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent rounded-md shadow-sm text-lg font-bold text-primary bg-accent hover:bg-accent-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
-                                    Set up an exploratory call
-                                </button>
-                            </div>
+                            <div class="sm:col-span-2 mt-4"><button type="submit" class="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent rounded-md shadow-sm text-lg font-bold text-primary bg-accent hover:bg-accent-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">Set up an exploratory call</button></div>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <!-- Testimonials Section -->
             <div class="bg-gray-50 py-20 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold text-primary sm:text-4xl">What people are saying</h2>
-                    </div>
-                    
-                    <!-- Accessible CSS Snap Carousel -->
+                    <div class="text-center mb-12"><h2 class="text-3xl font-bold text-primary sm:text-4xl">What people are saying</h2></div>
                     <div class="relative">
                         <div id="testimonial-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 no-scrollbar scroll-smooth" tabindex="0" aria-label="Testimonials Carousel">
-                            
-                            <!-- Testimonial 1 -->
                             <div class="snap-center shrink-0 w-full md:w-[600px] bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between">
-                                <div class="mb-6">
-                                    <div class="flex text-accent mb-4">
-                                        <!-- Stars -->
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                    </div>
-                                    <p class="text-xl text-gray-700 italic">"My mom said she would be able to go to the grocery store again with a cart like this. I didn't realize that carrying items was preventing her from going to the store until I told her about Persee."</p>
-                                </div>
-                                <div>
-                                    <p class="font-bold text-primary">L.</p>
-                                    <p class="text-sm text-gray-500">Caregiver for her mom</p>
-                                </div>
+                                <div class="mb-6"><div class="flex text-accent mb-4" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div><p class="text-xl text-gray-700 italic">"My mom said she would be able to go to the grocery store again with a cart like this. I didn't realize that carrying items was preventing her from going to the store until I told her about Persee."</p></div>
+                                <div><p class="font-bold text-primary">L.</p><p class="text-sm text-gray-500">Caregiver for her mom</p></div>
                             </div>
-                            
-                            <!-- Testimonial 2 -->
                             <div class="snap-center shrink-0 w-full md:w-[600px] bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col justify-between">
-                                <div class="mb-6">
-                                    <div class="flex text-accent mb-4">
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                                    </div>
-                                    <p class="text-xl text-gray-700 italic">"This is thoughtfully designed technology that can actually help someone's life."</p>
-                                </div>
-                                <div>
-                                    <p class="font-bold text-primary">A.</p>
-                                    <p class="text-sm text-gray-500">Software engineering manager</p>
-                                </div>
+                                <div class="mb-6"><div class="flex text-accent mb-4" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div><p class="text-xl text-gray-700 italic">"This is thoughtfully designed technology that can actually help someone's life."</p></div>
+                                <div><p class="font-bold text-primary">A.</p><p class="text-sm text-gray-500">Software engineering manager</p></div>
                             </div>
                         </div>
-                        
-                        <!-- Simple Carousel Controls -->
                         <div class="flex justify-center mt-6 space-x-4">
-                            <button onclick="document.getElementById('testimonial-container').scrollBy({left: -300, behavior: 'smooth'})" class="p-2 rounded-full bg-white border border-gray-200 text-primary hover:bg-gray-50 focus:ring-2 focus:ring-accent" aria-label="Previous testimonial">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            <button onclick="document.getElementById('testimonial-container').scrollBy({left: 300, behavior: 'smooth'})" class="p-2 rounded-full bg-white border border-gray-200 text-primary hover:bg-gray-50 focus:ring-2 focus:ring-accent" aria-label="Next testimonial">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </button>
+                            <button onclick="document.getElementById('testimonial-container').scrollBy({left: -300, behavior: 'smooth'})" class="p-2 rounded-full bg-white border border-gray-200 text-primary hover:bg-gray-50 focus:ring-2 focus:ring-accent" aria-label="Previous testimonial"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                            <button onclick="document.getElementById('testimonial-container').scrollBy({left: 300, behavior: 'smooth'})" class="p-2 rounded-full bg-white border border-gray-200 text-primary hover:bg-gray-50 focus:ring-2 focus:ring-accent" aria-label="Next testimonial"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
                         </div>
                     </div>
                 </div>
@@ -307,104 +234,31 @@ e<!DOCTYPE html>
 
         <!-- ==================== PRODUCT PAGE ==================== -->
         <section id="product" class="page-section" aria-labelledby="product-heading">
-            
-            <div class="bg-primary text-white py-16 text-center">
-                <h1 id="product-heading" class="text-4xl font-bold sm:text-5xl">Solutions for Every Path</h1>
-                <p class="mt-4 text-xl text-gray-200 max-w-2xl mx-auto">Let's find the right setup for you.</p>
-            </div>
-
+            <div class="bg-primary text-white py-16 text-center"><h1 id="product-heading" class="text-4xl font-bold sm:text-5xl">Solutions for Every Path</h1><p class="mt-4 text-xl text-gray-200 max-w-2xl mx-auto">Let's find the right setup for you.</p></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900">Are you a private individual or an organization?</h2>
-                </div>
-
-                <!-- Pathways Grid -->
+                <div class="text-center mb-12"><h2 class="text-3xl font-bold text-gray-900">Are you a private individual or an organization?</h2></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-                    
-                    <!-- Individual Path -->
                     <div class="bg-white border-2 border-gray-100 rounded-2xl p-8 hover:border-accent transition-colors shadow-sm flex flex-col h-full">
-                        <div class="flex-grow">
-                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            </div>
-                            <h3 class="text-2xl font-bold text-primary mb-4">Private Individual</h3>
-                            <p class="text-gray-600 text-lg mb-6">You're looking for a personal cart to help with groceries, park trips, or daily errands around the neighborhood.</p>
-                        </div>
-                        <a href="#specs" class="inline-flex justify-center items-center px-6 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-colors">
-                            View Product Specs &darr;
-                        </a>
+                        <div class="flex-grow"><div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6"><svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg></div><h3 class="text-2xl font-bold text-primary mb-4">Private Individual</h3><p class="text-gray-600 text-lg mb-6">You're looking for a personal cart to help with groceries, park trips, or daily errands around the neighborhood.</p></div>
+                        <a href="#specs" class="inline-flex justify-center items-center px-6 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-colors">View Product Specs &darr;</a>
                     </div>
-
-                    <!-- Organization Path -->
                     <div class="bg-primary border-2 border-primary rounded-2xl p-8 shadow-md flex flex-col h-full text-white relative overflow-hidden">
-                        <!-- Decorative background circle -->
                         <div class="absolute -right-10 -top-10 w-40 h-40 bg-white opacity-5 rounded-full"></div>
-                        <div class="flex-grow relative z-10">
-                            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6">
-                                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                            </div>
-                            <h3 class="text-2xl font-bold text-accent mb-4">Organization / Enterprise</h3>
-                            <p class="text-gray-200 text-lg mb-6">You represent a community center, municipality, or business needing a fleet of mobility solutions or custom configurations.</p>
-                        </div>
-                        <button onclick="navigateTo('home')" class="relative z-10 inline-flex justify-center items-center px-6 py-3 bg-accent text-primary font-bold rounded-lg hover:bg-accent-light transition-colors">
-                            Book an Introductory Call
-                        </button>
+                        <div class="flex-grow relative z-10"><div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6"><svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div><h3 class="text-2xl font-bold text-accent mb-4">Organization / Enterprise</h3><p class="text-gray-200 text-lg mb-6">You represent a community center, municipality, or business needing a fleet of mobility solutions or custom configurations.</p></div>
+                        <button onclick="navigateTo('home')" class="relative z-10 inline-flex justify-center items-center px-6 py-3 bg-accent text-primary font-bold rounded-lg hover:bg-accent-light transition-colors">Book an Introductory Call</button>
                     </div>
                 </div>
-
-                <!-- Detailed Specs Section -->
                 <div id="specs" class="pt-12 border-t border-gray-200 scroll-mt-24">
                     <h2 class="text-3xl font-bold text-primary mb-10 text-center">Persee Robotic Cart: Core Specifications</h2>
-                    
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-2">
-                            <div class="p-8 md:p-12 bg-gray-50 flex items-center justify-center">
-                                <!-- Placeholder for a tech-drawing or clean image of the cart alone -->
-                                <img src="https://placehold.co/600x600/155E58/FFFFFF?text=Product+Diagram" alt="Diagram showing the sturdy 6-wheel base and spacious cargo bin of the MA Labs cart" class="rounded-lg shadow-sm mix-blend-multiply">
-                            </div>
-                            <div class="p-8 md:p-12">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-6">Built for Everyday Life</h3>
-                                <ul class="space-y-6">
-                                    <li class="flex items-start">
-                                        <div class="flex-shrink-0 h-6 w-6 text-accent mt-1">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        </div>
-                                        <div class="ml-4">
-                                            <h4 class="text-lg font-bold text-gray-900">Follow-Me Technology</h4>
-                                            <p class="mt-1 text-gray-600">Advanced kinematics and computer vision keeps the cart safely tethered to you at a comfortable walking pace.</p>
-                                        </div>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <div class="flex-shrink-0 h-6 w-6 text-accent mt-1">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        </div>
-                                        <div class="ml-4">
-                                            <h4 class="text-lg font-bold text-gray-900">All-Terrain 4-Wheel Drive</h4>
-                                            <p class="mt-1 text-gray-600">Navigate anywhere from grass to uneven sidewalks easily with our proprietary suspension system.</p>
-                                        </div>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <div class="flex-shrink-0 h-6 w-6 text-accent mt-1">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        </div>
-                                        <div class="ml-4">
-                                            <h4 class="text-lg font-bold text-gray-900">Heavy-Duty Capacity</h4>
-                                            <p class="mt-1 text-gray-600">Safely carries up to 100 lbs of groceries, sports gear, or picnic supplies.</p>
-                                        </div>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <div class="flex-shrink-0 h-6 w-6 text-accent mt-1">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        </div>
-                                        <div class="ml-4">
-                                            <h4 class="text-lg font-bold text-gray-900">All-Day Battery</h4>
-                                            <p class="mt-1 text-gray-600">Up to 4 hours following on a single charge. Plugs into any standard wall outlet.</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"><div class="grid grid-cols-1 md:grid-cols-2">
+                        <div class="p-8 md:p-12 bg-gray-50 flex items-center justify-center"><img src="https://placehold.co/600x600/155E58/FFFFFF?text=Product+Diagram" alt="Diagram showing the sturdy 6-wheel base and spacious cargo bin of the MA Labs cart" class="rounded-lg shadow-sm mix-blend-multiply"></div>
+                        <div class="p-8 md:p-12"><h3 class="text-2xl font-bold text-gray-900 mb-6">Built for Everyday Life</h3><ul class="space-y-6">
+                            <li class="flex items-start"><div class="flex-shrink-0 h-6 w-6 text-accent mt-1"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div><div class="ml-4"><h4 class="text-lg font-bold text-gray-900">Follow-Me Technology</h4><p class="mt-1 text-gray-600">Advanced kinematics and computer vision keeps the cart safely tethered to you at a comfortable walking pace.</p></div></li>
+                            <li class="flex items-start"><div class="flex-shrink-0 h-6 w-6 text-accent mt-1"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div><div class="ml-4"><h4 class="text-lg font-bold text-gray-900">All-Terrain 4-Wheel Drive</h4><p class="mt-1 text-gray-600">Navigate anywhere from grass to uneven sidewalks easily with our proprietary suspension system.</p></div></li>
+                            <li class="flex items-start"><div class="flex-shrink-0 h-6 w-6 text-accent mt-1"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div><div class="ml-4"><h4 class="text-lg font-bold text-gray-900">Heavy-Duty Capacity</h4><p class="mt-1 text-gray-600">Safely carries up to 100 lbs of groceries, sports gear, or picnic supplies.</p></div></li>
+                            <li class="flex items-start"><div class="flex-shrink-0 h-6 w-6 text-accent mt-1"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div><div class="ml-4"><h4 class="text-lg font-bold text-gray-900">All-Day Battery</h4><p class="mt-1 text-gray-600">Up to 4 hours following on a single charge. Plugs into any standard wall outlet.</p></div></li>
+                        </ul></div>
+                    </div></div>
                 </div>
             </div>
         </section>
@@ -413,135 +267,75 @@ e<!DOCTYPE html>
         <section id="about" class="page-section" aria-labelledby="about-heading">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                    
-                    <!-- Story Section -->
                     <div>
                         <h1 id="about-heading" class="text-4xl font-bold text-primary mb-8 sm:text-5xl">The Story Behind <br>MA Labs</h1>
-                        
                         <div class="prose prose-lg text-gray-600">
-                            <!-- EDIT: Replace with your actual background experience -->
-                            <p class="mb-6 text-xl text-gray-800 font-medium">
-                                Hi, I'm Dr. Catherine Yunis. Before founding Mary Alicia Labs, I spent 10 years working in assistive technology for mobility disorders, building tools designed to make human life a little bit easier.
-                            </p>
-                            
-                            <!-- EDIT: Replace with the sweet story about your abuela -->
-                            <p class="mb-6">
-                                But the real inspiration for Mary Alicia Labs didn't come from a lab. It came from my Abuela. Growing up, I watched her stubbornly insist on doing her own grocery shopping at the local market. She loved the independence and a chance to get out of the house and chat with vendors. But as she got older, carrying the heavy bags back home became a struggle that slowly started to rob her of that daily joy.
-                            </p>
-                            <p class="mb-6">
-                                I realized that true mobility isn't just about wheelchairs or vehicles—it's about removing the literal burdens that stop people from living their lives actively and vibrantly. I built the first prototype of our cart in my apartment so my Abuela could walk freely, unburdened, with her "helpful neighbor" carrying the load right beside her. 
-                            </p>
-                            <p>
-                                Today, Mary Alicia Labs is dedicated to that exact mission: keeping goods and people moving with dignity, joy, and practical design.
-                            </p>
+                            <p class="mb-6 text-xl text-gray-800 font-medium">Hi, I'm Dr. Catherine Yunis. Before founding Mary Alicia Labs, I spent 10 years working in assistive technology for mobility disorders, building tools designed to make human life a little bit easier.</p>
+                            <p class="mb-6">But the real inspiration for Mary Alicia Labs didn't come from a lab. It came from my Abuela. Growing up, I watched her stubbornly insist on doing her own grocery shopping at the local market. She loved the independence and a chance to get out of the house and chat with vendors. But as she got older, carrying the heavy bags back home became a struggle that slowly started to rob her of that daily joy.</p>
+                            <p class="mb-6">I realized that true mobility isn't just about wheelchairs or vehicles—it’s about removing the literal burdens that stop people from living their lives actively and vibrantly. I built the first prototype of our cart in my apartment so my Abuela could walk freely, unburdened, with her “helpful neighbor” carrying the load right beside her.</p>
+                            <p>Today, Mary Alicia Labs is dedicated to that exact mission: keeping goods and people moving with dignity, joy, and practical design.</p>
                         </div>
                     </div>
-
-                    <!-- Contact/CTA Section -->
                     <div class="bg-primary text-white rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
-                        <!-- Decorative shapes -->
                         <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-primary-light opacity-50"></div>
                         <div class="absolute bottom-0 left-0 -ml-8 -mb-8 w-24 h-24 rounded-full bg-accent opacity-20"></div>
-                        
                         <div class="relative z-10">
                             <h2 class="text-3xl font-bold text-accent mb-4">Believe in what we’re doing?</h2>
-                            <p class="text-lg mb-8 text-gray-100">Let’s find a way to collaborate. Whether it's for funding, partnerships, joining the team, or becoming a beta tester—I'd love to hear from you.</p>
-                            
-                            <!-- Mailto Contact Form -->
-                            <!-- EDIT: action="mailto:..." uses the user's default email client. Keep enctype="text/plain" so the text is readable. -->
-                            <form action="mailto:catherine@maryalicialabs.com" method="POST" enctype="text/plain" class="space-y-4" aria-label="Direct Contact Form">
-                                <div>
-                                    <label for="contact-name" class="block text-sm font-semibold text-gray-200">Name</label>
-                                    <input type="text" id="contact-name" name="Name" required class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent">
-                                </div>
-                                <div>
-                                    <label for="contact-reason" class="block text-sm font-semibold text-gray-200">Reason for Outreach</label>
-                                    <select id="contact-reason" name="Reason" class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent">
-                                        <option>Partnership Inquiry</option>
-                                        <option>Investment/Funding</option>
-                                        <option>Beta Testing</option>
-                                        <option>Careers</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="contact-message" class="block text-sm font-semibold text-gray-200">Message</label>
-                                    <textarea id="contact-message" name="Message" rows="4" required class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent"></textarea>
-                                </div>
-                                <button type="submit" class="w-full mt-4 bg-accent hover:bg-accent-light text-primary font-bold text-lg py-4 px-6 rounded-md transition-colors focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50">
-                                    Send Email to Catherine
-                                </button>
-                                <p class="text-xs text-center text-gray-300 mt-2">This will open your default email application.</p>
+                            <p class="text-lg mb-8 text-gray-100">Let’s find a way to collaborate. Whether it's for funding, partnerships, joining the team, or becoming a beta tester—I’d love to hear from you.</p>
+                            <!-- Use a mailto URL on submit rather than POSTing to mailto; this avoids the browser's insecure form-submission warning. -->
+                            <form onsubmit="sendContactEmail(event)" class="space-y-4" aria-label="Direct Contact Form">
+                                <div><label for="contact-name" class="block text-sm font-semibold text-gray-200">Name</label><input type="text" id="contact-name" name="Name" required class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent"></div>
+                                <div><label for="contact-reason" class="block text-sm font-semibold text-gray-200">Reason for Outreach</label><select id="contact-reason" name="Reason" class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent"><option>Partnership Inquiry</option><option>Investment/Funding</option><option>Beta Testing</option><option>Careers</option><option>Other</option></select></div>
+                                <div><label for="contact-message" class="block text-sm font-semibold text-gray-200">Message</label><textarea id="contact-message" name="Message" rows="4" required class="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-accent"></textarea></div>
+                                <button type="submit" class="w-full mt-4 bg-accent hover:bg-accent-light text-primary font-bold text-lg py-4 px-6 rounded-md transition-colors focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50">Send Email to Catherine</button>
+                                <p class="text-xs text-center text-gray-300 mt-2">This opens your default email application. Review and send the message there.</p>
                             </form>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer -->
     <footer class="bg-surface border-t border-gray-200 mt-auto py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
-                <span class="font-bold text-xl text-primary">MA Labs</span>
-            </div>
-            <div class="text-gray-500 text-sm">
-                &copy; 2026 Mary Alicia Labs. All rights reserved.
-            </div>
+            <div class="mb-4 md:mb-0"><span class="font-bold text-xl text-primary">MA Labs</span></div>
+            <div class="text-gray-500 text-sm">&copy; 2026 Mary Alicia Labs. All rights reserved.</div>
         </div>
     </footer>
 
     <!-- Scripts for Navigation and Interactivity -->
     <script>
-        /**
-         * Navigation logic for Single Page App (SPA) feel.
-         * Hides all sections, shows the target, and updates active nav states.
-         */
-        function navigateTo(targetId) {
-            // 1. Hide all page sections
-            const sections = document.querySelectorAll('.page-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+        /** Opens a prefilled email in the visitor's default mail application. */
+        function sendContactEmail(event) {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const subject = `Website contact: ${formData.get('Reason')}`;
+            const body = `Name: ${formData.get('Name')}\nReason for Outreach: ${formData.get('Reason')}\n\nMessage:\n${formData.get('Message')}`;
+            window.location.href = `mailto:catheriney@maryalicialabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
 
-            // 2. Remove active styling from all links
+        /** Navigation logic for Single Page App (SPA) feel. */
+        function navigateTo(targetId) {
+            document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
             const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
             navLinks.forEach(link => {
-                // Remove visual active cues
                 link.classList.remove('text-primary', 'border-accent');
-                if(link.classList.contains('nav-link')) {
-                    link.classList.add('border-transparent');
-                }
-                // Accessibility: remove aria-current
+                if (link.classList.contains('nav-link')) link.classList.add('border-transparent');
                 link.removeAttribute('aria-current');
             });
-
-            // 3. Show target section
             const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
-
-            // 4. Highlight new active links
-            const activeLinks = document.querySelectorAll(`[data-target="${targetId}"]`);
-            activeLinks.forEach(link => {
+            if (targetSection) targetSection.classList.add('active');
+            document.querySelectorAll(`[data-target="${targetId}"]`).forEach(link => {
                 link.classList.add('text-primary');
-                if(link.classList.contains('nav-link')) {
+                if (link.classList.contains('nav-link')) {
                     link.classList.remove('border-transparent');
                     link.classList.add('border-accent');
                 }
-                // Accessibility: announce active page
                 link.setAttribute('aria-current', 'page');
             });
-
-            // 5. Scroll to top and shift focus for accessibility
             window.scrollTo({ top: 0, behavior: 'smooth' });
             document.getElementById('main-content').focus();
-
-            // 6. Close mobile menu if it is open
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             if (!mobileMenu.classList.contains('hidden')) {
@@ -550,20 +344,13 @@ e<!DOCTYPE html>
             }
         }
 
-        // Mobile Menu Toggle Logic
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-
             mobileMenuBtn.addEventListener('click', () => {
                 const isHidden = mobileMenu.classList.contains('hidden');
-                if (isHidden) {
-                    mobileMenu.classList.remove('hidden');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'true');
-                } else {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
+                mobileMenu.classList.toggle('hidden', !isHidden);
+                mobileMenuBtn.setAttribute('aria-expanded', String(isHidden));
             });
         });
     </script>
